@@ -1,0 +1,9 @@
+1. simulate the pre-treatment to get the initial states based on data assimilation
+
+2. run data assimilation using the initial states and observations
+
+3. run simulations for acclimation: parameters from control plot to run different experimental plots
+
+to-do:
+re-handle observation data for pretreat 23 to 24
+
