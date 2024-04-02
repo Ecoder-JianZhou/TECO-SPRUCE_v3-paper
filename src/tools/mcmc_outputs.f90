@@ -45,7 +45,7 @@ contains
         ! allocate the total simulation results
     end subroutine init_mcmc_outputs
 
-    subroutine mcmc_param_outputs(nUpgraded, npar4DA, st)!, DAparidx)
+    subroutine mcmc_param_outputs(nUpgraded, npar4DA, st, nsave)!, DAparidx)
         implicit none
         integer, intent(in) :: nUpgraded, npar4DA
         type(site_data_type), intent(inout) :: st
@@ -53,7 +53,7 @@ contains
         character(250) :: outfile_mc_ParamSets
         ! character(*), intent(in) :: parnames0(:)
         character(1200) :: header_line
-        integer :: ipft, isimu
+        integer :: ipft, isimu, nsave
 
         ! delete the built-in
         nBuilt_in = int(0.1*nUpgraded)
