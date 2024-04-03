@@ -154,10 +154,10 @@ module mcmc
         do iDAsimu = 1, nDAsimu
             ! write(*,*) iDAsimu, "/", nDAsimu, J_last, J_new, upgraded, accept_rate
             
-            ! write(*,*) iDAsimu, "/", nDAsimu,  J_show_old, J_show_new, upgraded, accept_rate
-            do ishow = 1, nobs
-                write(*,*) iDAsimu, "/", nDAsimu, upgraded, ishow, J_last(ishow), J_new(ishow), J_last(ishow) - J_new(ishow)
-            enddo
+            write(*,*) iDAsimu, "/", nDAsimu,  J_show_old, J_show_new, upgraded, accept_rate
+            ! do ishow = 1, nobs
+            !     write(*,*) iDAsimu, "/", nDAsimu, upgraded, ishow, J_last(ishow), J_new(ishow), J_last(ishow) - J_new(ishow)
+            ! enddo
     !         write(*,*) iDAsimu, "/", nDAsimu, J_last(1),"/", J_new(1),";", J_last(2),"/", J_new(2),";",&
     ! & J_last(3),"/", J_new(3),";", J_last(4),"/", J_new(4),";", J_last(5),"/", J_new(5),";",upgraded, accept_rate
             call mcmc_functions_init()  ! initialize the mc_itime ... variablesc
