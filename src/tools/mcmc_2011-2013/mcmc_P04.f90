@@ -268,8 +268,13 @@ module mcmc
             endif
 
             if((mod(IDAsimu, 100) .eq. 0) .and. (upgraded .gt. 2)) then
-                call mcmc_param_outputs(upgraded, npar4DA, st, nsave)
-                nsave = nsave + 1
+                ! call mcmc_param_outputs(upgraded, npar4DA, st, nsave)
+                mc_DApar%DApar = arr_params_set%tot_paramsets(upgraded,:)
+                call mc_update_mc_params()
+                call mc_update_params4simu()
+                call initialize_teco(st)!, .True.)
+                call teco_simu(st, .True.)            ! run the model
+                ! nsave = nsave + 1
             endif
 
         enddo
