@@ -782,6 +782,21 @@ module mcmc
                  vars4MCMC%photo_shrub_d%obsData(:,5), J_cost)
             J_new(20) = J_new(20) + 0!J_cost
         endif
+        ! -----------------------------
+
+        ! bnpp_tree_y
+        if(vars4MCMC%bnpp_tree_y%existOrNot)then
+            call CalculateCost(vars4MCMC%bnpp_tree_y%mdData(:,4), vars4MCMC%bnpp_tree_y%obsData(:,4),&
+                 vars4MCMC%bnpp_tree_y%obsData(:,5), J_cost)
+            J_new(21) = J_new(21) + J_cost*100
+        endif
+
+        ! bnpp_shrub_y        
+        if(vars4MCMC%bnpp_shrub_y%existOrNot)then
+            call CalculateCost(vars4MCMC%bnpp_shrub_y%mdData(:,4), vars4MCMC%bnpp_shrub_y%obsData(:,4),&
+                 vars4MCMC%bnpp_shrub_y%obsData(:,5), J_cost)
+            J_new(22) = J_new(22) + J_cost*100
+        endif
 
         ! =====================================================================================
 

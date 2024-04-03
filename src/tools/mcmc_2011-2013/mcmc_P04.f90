@@ -7,9 +7,10 @@ module mcmc
     implicit none
 
     integer ipar, covexist, npar4DA
+    integer,parameter :: nobs = 22
 
     real(8) :: fact_rejet
-    real(8) J_last(20), J_new(20), accept_rate, J_show_old, J_show_new, delta_scale, delta_scale_min, delta_scale_max
+    real(8) J_last(nobs), J_new(nobs), accept_rate, J_show_old, J_show_new, delta_scale, delta_scale_min, delta_scale_max
     integer new, reject
     logical do_cov2createNewPars, do_cov
     integer, allocatable :: mark_npar(:)
@@ -32,7 +33,7 @@ module mcmc
         call readMCMC_configs_NML(in_mcmc_configfile)    ! update mc_params: st parameters and sp parameters
         ! read the observational data
         call readObsData() ! return a type array of vars4MCMC
-
+        
         ! initilize the parameters and initial values in TECO model
         ! allocate(npar4DA(npft))         ! How many parameters need to be optimized
         ! allocate(mc_parvals(npft))      ! set: parval, parmin, parmax
@@ -152,7 +153,7 @@ module mcmc
             ! write(*,*) iDAsimu, "/", nDAsimu, J_last, J_new, upgraded, accept_rate
             
             write(*,*) iDAsimu, "/", nDAsimu,  J_show_old, J_show_new, upgraded, accept_rate
-            ! do ishow = 1, 20
+            ! do ishow = 1, nobs
             !     write(*,*) iDAsimu, "/", nDAsimu, upgraded, ishow, J_last(ishow), J_new(ishow), J_last(ishow) - J_new(ishow)
             ! enddo
     !         write(*,*) iDAsimu, "/", nDAsimu, J_last(1),"/", J_new(1),";", J_last(2),"/", J_new(2),";",&
@@ -641,8 +642,8 @@ module mcmc
 
     subroutine costFuncObs_old()
         implicit none
-        real(8) J_cost, delta_J(20), cs_rand, delta_J_new
-        integer :: ipft, iaccep(20), i, iupdata, nupdata, iiii
+        real(8) J_cost, delta_J(nobs), cs_rand, delta_J_new
+        integer :: ipft, iaccep(nobs), i, iupdata, nupdata, iiii
         
         J_new = 0
         nupdata = 12
@@ -794,6 +795,21 @@ module mcmc
                  vars4MCMC%photo_shrub_d%obsData(:,5), J_cost)
             J_new(20) = J_new(20) + 0!J_cost
         endif
+        ! -----------------------------
+
+        ! bnpp_tree_y
+        if(vars4MCMC%bnpp_tree_y%existOrNot)then
+            call CalculateCost(vars4MCMC%bnpp_tree_y%mdData(:,4), vars4MCMC%bnpp_tree_y%obsData(:,4),&
+                 vars4MCMC%bnpp_tree_y%obsData(:,5), J_cost)
+            J_new(21) = J_new(21) + J_cost*100
+        endif
+
+        ! bnpp_shrub_y        
+        if(vars4MCMC%bnpp_shrub_y%existOrNot)then
+            call CalculateCost(vars4MCMC%bnpp_shrub_y%mdData(:,4), vars4MCMC%bnpp_shrub_y%obsData(:,4),&
+                 vars4MCMC%bnpp_shrub_y%obsData(:,5), J_cost)
+            J_new(22) = J_new(22) + J_cost*100
+        endif
 
         ! =====================================================================================
 
@@ -874,7 +890,7 @@ module mcmc
         ! ! write(*,*) "here2",J_new
         iaccep = 0
         nupdata = 12 
-        do i = 1,20
+        do i = 1,nobs
             ! if (iDAsimu .eq. i*nDAsimu/nupdata+1) then
             !    if(i<12) J_last(i+1) = J_new(i+1)
             ! endif

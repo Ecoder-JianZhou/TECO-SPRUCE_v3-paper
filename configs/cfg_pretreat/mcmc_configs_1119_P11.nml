@@ -37,6 +37,8 @@ obsfile_watertable_h = "observation_files/obsfile_watertable_h.txt"
 obsfile_LAI_tree_d = "observation_files/obsfile_LAI_tree_d.txt"
 obsfile_LAI_shrub_d = "observation_files/obsfile_LAI_shrub_d.txt"
 obsfile_photo_tree_h = "observation_files/obsfile_photo_tree_h.txt"
+obsfile_bnpp_tree_y  = "observation_files/obsfile_bnpp_tree_y.txt"
+obsfile_bnpp_shrub_y = "observation_files/obsfile_bnpp_shrub_y.txt"
 /
 &nml_site_params	
     ! site-based: def-value, min-value, max-value  
