@@ -153,10 +153,10 @@ module mcmc
         do iDAsimu = 1, nDAsimu
             ! write(*,*) iDAsimu, "/", nDAsimu, J_last, J_new, upgraded, accept_rate
             
-            write(*,*) iDAsimu, "/", nDAsimu,  J_show_old, J_show_new, upgraded, accept_rate
-            ! do ishow = 1, nobs
-            !     write(*,*) iDAsimu, "/", nDAsimu, upgraded, ishow, J_last(ishow), J_new(ishow), J_last(ishow) - J_new(ishow)
-            ! enddo
+            ! write(*,*) iDAsimu, "/", nDAsimu,  J_show_old, J_show_new, upgraded, accept_rate
+            do ishow = 1, nobs
+                write(*,*) iDAsimu, "/", nDAsimu, upgraded, ishow, J_last(ishow), J_new(ishow), J_last(ishow) - J_new(ishow)
+            enddo
     !         write(*,*) iDAsimu, "/", nDAsimu, J_last(1),"/", J_new(1),";", J_last(2),"/", J_new(2),";",&
     ! & J_last(3),"/", J_new(3),";", J_last(4),"/", J_new(4),";", J_last(5),"/", J_new(5),";",upgraded, accept_rate
             call mcmc_functions_init()  ! initialize the mc_itime ... variables
@@ -926,8 +926,7 @@ module mcmc
         !     J_last = J_new
         ! endif
         call random_number(cs_rand)
-        ! delta_J_new = (sum(J_new(1:15)) - sum(J_last(1:15)))!/15 * delta_scale!0.05
-        delta_J_new = (sum(J_new) - sum(J_last))!/15 * delta_scale!0.05
+        delta_J_new = (sum(J_new(1:15)) - sum(J_last(1:15)))!/15 * delta_scale!0.05
         ! if(AMIN1(1.0, exp(-sum(delta_J))) .gt. cs_rand)then
         if(AMIN1(1.0, exp(-delta_J_new)) .gt. cs_rand)then
         ! if(AMIN1(1.0, exp(-sum(delta_J(1:2)))) .gt. cs_rand)then
