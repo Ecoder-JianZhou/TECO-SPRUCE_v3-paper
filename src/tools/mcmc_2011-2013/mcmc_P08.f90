@@ -7,9 +7,10 @@ module mcmc
     implicit none
 
     integer ipar, covexist, npar4DA
+    integer,parameter :: nobs = 22
 
     real(8) :: fact_rejet
-    real(8) J_last(20), J_new(20), accept_rate, J_show_old, J_show_new, delta_scale, delta_scale_min, delta_scale_max
+    real(8) J_last(nobs), J_new(nobs), accept_rate, J_show_old, J_show_new, delta_scale, delta_scale_min, delta_scale_max
     integer new, reject
     logical do_cov2createNewPars, do_cov
     integer, allocatable :: mark_npar(:)
@@ -134,6 +135,9 @@ module mcmc
         type(site_data_type), intent(inout) :: st
         integer temp_upgraded, ipft, mark4scale, ishow, nonaccept
         real(8) rand, init_scale, rand_scale
+        integer nsave
+        character(3) :: str_nsave
+        nsave = 1
         
         print *, "# Start to run mcmc ..."
         call generate_newPar()
@@ -150,10 +154,10 @@ module mcmc
         do iDAsimu = 1, nDAsimu
             ! write(*,*) iDAsimu, "/", nDAsimu, J_last, J_new, upgraded, accept_rate
             
-            write(*,*) iDAsimu, "/", nDAsimu,  J_show_old, J_show_new, upgraded, accept_rate
-            ! do ishow = 1, 20
-            !     write(*,*) iDAsimu, "/", nDAsimu, upgraded, ishow, J_last(ishow), J_new(ishow), J_last(ishow) - J_new(ishow)
-            ! enddo
+            ! write(*,*) iDAsimu, "/", nDAsimu,  J_show_old, J_show_new, upgraded, accept_rate
+            do ishow = 1, nobs
+                write(*,*) iDAsimu, "/", nDAsimu, upgraded, ishow, J_last(ishow), J_new(ishow), J_last(ishow) - J_new(ishow)
+            enddo
     !         write(*,*) iDAsimu, "/", nDAsimu, J_last(1),"/", J_new(1),";", J_last(2),"/", J_new(2),";",&
     ! & J_last(3),"/", J_new(3),";", J_last(4),"/", J_new(4),";", J_last(5),"/", J_new(5),";",upgraded, accept_rate
             call mcmc_functions_init()  ! initialize the mc_itime ... variables
@@ -265,6 +269,18 @@ module mcmc
                         mc_DApar%gamma = mc_DApar%gamnew
                     endif
                 endif
+            endif
+
+            if((mod(IDAsimu, 100) .eq. 0) .and. (upgraded .gt. 2)) then
+                ! call mcmc_param_outputs(upgraded, npar4DA, st, nsave)
+                write(str_nsave, "(I0.3)") nsave
+                mc_str_n = "mid_save_"//adjustl(trim(str_nsave))  
+                mc_DApar%DApar = arr_params_set%tot_paramsets(upgraded,:)
+                call mc_update_mc_params()
+                call mc_update_params4simu()
+                call initialize_teco(st)!, .True.)
+                call teco_simu(st, .True.)            ! run the model
+                nsave = nsave + 1
             endif
         enddo
 
@@ -630,8 +646,8 @@ module mcmc
 
     subroutine costFuncObs_old()
         implicit none
-        real(8) J_cost, delta_J(20), cs_rand, delta_J_new
-        integer :: ipft, iaccep(20), i, iupdata, nupdata, iiii
+        real(8) J_cost, delta_J(nobs), cs_rand, delta_J_new
+        integer :: ipft, iaccep(nobs), i, iupdata, nupdata, iiii
         
         J_new = 0
         nupdata = 12
@@ -880,7 +896,7 @@ module mcmc
         ! ! write(*,*) "here2",J_new
         iaccep = 0
         nupdata = 12 
-        do i = 1,20
+        do i = 1,nobs
             ! if (iDAsimu .eq. i*nDAsimu/nupdata+1) then
             !    if(i<12) J_last(i+1) = J_new(i+1)
             ! endif
