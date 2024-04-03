@@ -926,7 +926,8 @@ module mcmc
         !     J_last = J_new
         ! endif
         call random_number(cs_rand)
-        delta_J_new = (sum(J_new(1:15)) - sum(J_last(1:15)))!/15 * delta_scale!0.05
+        ! delta_J_new = (sum(J_new(1:15)) - sum(J_last(1:15)))!/15 * delta_scale!0.05
+        delta_J_new = (sum(J_new) - sum(J_last))!/15 * delta_scale!0.05
         ! if(AMIN1(1.0, exp(-sum(delta_J))) .gt. cs_rand)then
         if(AMIN1(1.0, exp(-delta_J_new)) .gt. cs_rand)then
         ! if(AMIN1(1.0, exp(-sum(delta_J(1:2)))) .gt. cs_rand)then
