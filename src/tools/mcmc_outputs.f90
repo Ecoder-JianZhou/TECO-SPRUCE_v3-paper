@@ -53,7 +53,15 @@ contains
         character(250) :: outfile_mc_ParamSets
         ! character(*), intent(in) :: parnames0(:)
         character(1200) :: header_line
+        character(5)   :: str_nsave
         integer :: ipft, isimu, nsave
+
+        if(nsave .eq. 0) then
+            str_nsave = ""
+        else
+            write(str_nsave, '(I5)') nsave
+        endif
+
 
         ! delete the built-in
         nBuilt_in = int(0.1*nUpgraded)
@@ -76,7 +84,7 @@ contains
         allocate(arr_params_set%upg_paramsets((nUpgraded - nBuilt_in), npar4DA))
         arr_params_set%upg_paramsets = arr_params_set%tot_paramsets(nBuilt_in:nUpgraded, :)
         ! write(*,*)"test_all", nBuilt_in, nUpgraded, size(tot_paramsets,1), size(tot_paramsets,2)
-        outfile_mc_ParamSets = adjustl(trim(outDir_mcmc))//"/"//adjustl(trim("total_parameter_sets.csv"))
+    outfile_mc_ParamSets = adjustl(trim(outDir_mcmc))//"/"//adjustl(trim("total_parameter_sets"))//adjustl(trim(str_nsave))//".csv"
         open(118, file=outfile_mc_ParamSets, status='replace')
         write(118, *) header_line
         do iline = 1, size(arr_params_set%upg_paramsets, 1)
@@ -100,7 +108,7 @@ contains
             ! endif
         enddo
 
-        outfile_mc_ParamSets = adjustl(trim(outDir_mcmc))//"/"//adjustl(trim("sel_parameter_sets.csv"))
+        outfile_mc_ParamSets = adjustl(trim(outDir_mcmc))//"/"//adjustl(trim("sel_parameter_sets.csv"))//adjustl(trim(str_nsave))//".csv"
         open(137, file=outfile_mc_ParamSets, status='replace')
         write(137, *) header_line
         do iline = 1, nRand

@@ -132,13 +132,14 @@ module mcmc
     subroutine run_mcmc(st)
         implicit none
         type(site_data_type), intent(inout) :: st
-        integer temp_upgraded, ipft, mark4scale, ishow, nonaccept
+        integer temp_upgraded, ipft, mark4scale, ishow, nonaccept, nsave
         real(8) rand, init_scale, rand_scale
         
         print *, "# Start to run mcmc ..."
         call generate_newPar()
         ! print *, "here ..."
         ! call generate_rand_newpar()
+        nsave = 1
         upgraded = 0
         new = 0
         mark4scale = 0
@@ -267,13 +268,14 @@ module mcmc
             endif
 
             if((mod(nDAsimu, 100) .eq. 0) .and. (upgraded .gt. 2)) then
-                call mcmc_param_outputs(upgraded, npar4DA, st)
+                call mcmc_param_outputs(upgraded, npar4DA, st, nsave)
+                nsave = nsave + 1
             endif
 
         enddo
 
         ! summary
-        call mcmc_param_outputs(upgraded, npar4DA, st)!, mc_DApar)  ! update the variable of 
+        call mcmc_param_outputs(upgraded, npar4DA, st, 0)!, mc_DApar)  ! update the variable of 
     end subroutine run_mcmc
 
     subroutine generate_newPar()
