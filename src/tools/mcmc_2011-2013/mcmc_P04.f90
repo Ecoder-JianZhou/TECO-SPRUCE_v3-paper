@@ -284,7 +284,7 @@ module mcmc
         enddo
 
         ! summary
-        call mcmc_param_outputs(upgraded, npar4DA, st, 0)!, mc_DApar)  ! update the variable of 
+        call mcmc_param_outputs(upgraded, npar4DA, st)!, 0)!, mc_DApar)  ! update the variable of 
     end subroutine run_mcmc
 
     subroutine generate_newPar()
