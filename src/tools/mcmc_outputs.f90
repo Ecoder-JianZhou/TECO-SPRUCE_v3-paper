@@ -45,7 +45,7 @@ contains
         ! allocate the total simulation results
     end subroutine init_mcmc_outputs
 
-    subroutine mcmc_param_outputs(nUpgraded, npar4DA, st, nsave)!, DAparidx)
+    subroutine mcmc_param_outputs(nUpgraded, npar4DA, st)!, nsave)!, DAparidx)
         implicit none
         integer, intent(in) :: nUpgraded, npar4DA
         type(site_data_type), intent(inout) :: st
@@ -84,7 +84,7 @@ contains
         allocate(arr_params_set%upg_paramsets((nUpgraded - nBuilt_in), npar4DA))
         arr_params_set%upg_paramsets = arr_params_set%tot_paramsets(nBuilt_in:nUpgraded, :)
         ! write(*,*)"test_all", nBuilt_in, nUpgraded, size(tot_paramsets,1), size(tot_paramsets,2)
-    outfile_mc_ParamSets = adjustl(trim(outDir_mcmc))//"/"//adjustl(trim("total_parameter_sets"))//adjustl(trim(str_nsave))//".csv"
+    outfile_mc_ParamSets = adjustl(trim(outDir_mcmc))//"/"//adjustl(trim("total_parameter_sets.csv"))!//adjustl(trim(str_nsave))//".csv"
         open(118, file=outfile_mc_ParamSets, status='replace')
         write(118, *) header_line
         do iline = 1, size(arr_params_set%upg_paramsets, 1)
@@ -108,7 +108,7 @@ contains
             ! endif
         enddo
 
-        outfile_mc_ParamSets = adjustl(trim(outDir_mcmc))//"/"//adjustl(trim("sel_parameter_sets.csv"))//adjustl(trim(str_nsave))//".csv"
+        outfile_mc_ParamSets = adjustl(trim(outDir_mcmc))//"/"//adjustl(trim("sel_parameter_sets.csv"))!//adjustl(trim(str_nsave))//".csv"
         open(137, file=outfile_mc_ParamSets, status='replace')
         write(137, *) header_line
         do iline = 1, nRand
@@ -166,6 +166,8 @@ contains
 
         ! deallocate
         ! deallocate(DA_parname)
+        ! if(allocated(arr_params_set%sel_paramsets)) deallocate(arr_params_set%sel_paramsets)
+        ! if(allocated(arr_params_set%upg_paramsets)) deallocate(arr_params_set%upg_paramsets)
         
     end subroutine mcmc_param_outputs
 

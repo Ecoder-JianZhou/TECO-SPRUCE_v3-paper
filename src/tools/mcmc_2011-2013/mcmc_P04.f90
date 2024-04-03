@@ -267,7 +267,7 @@ module mcmc
                 endif
             endif
 
-            if((mod(nDAsimu, 100) .eq. 0) .and. (upgraded .gt. 2)) then
+            if((mod(IDAsimu, 100) .eq. 0) .and. (upgraded .gt. 2)) then
                 call mcmc_param_outputs(upgraded, npar4DA, st, nsave)
                 nsave = nsave + 1
             endif
