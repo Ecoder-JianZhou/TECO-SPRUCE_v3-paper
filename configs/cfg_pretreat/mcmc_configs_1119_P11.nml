@@ -1,5 +1,5 @@
 &nml_mcmc_settings
-nDAsimu = 50000
+nDAsimu = 500
 search_scale = 0.02
 ncov = 50000
 nRand = 5
