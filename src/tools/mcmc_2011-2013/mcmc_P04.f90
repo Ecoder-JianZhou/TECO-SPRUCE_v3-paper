@@ -135,6 +135,7 @@ module mcmc
         type(site_data_type), intent(inout) :: st
         integer temp_upgraded, ipft, mark4scale, ishow, nonaccept, nsave
         real(8) rand, init_scale, rand_scale
+        character(3) :: str_nsave
         
         print *, "# Start to run mcmc ..."
         call generate_newPar()
@@ -270,12 +271,14 @@ module mcmc
 
             if((mod(IDAsimu, 100) .eq. 0) .and. (upgraded .gt. 2)) then
                 ! call mcmc_param_outputs(upgraded, npar4DA, st, nsave)
+                write(str_nsave, "(I0.3)") nsave
+                mc_str_n = "mid_save_"//adjustl(trim(str_nsave))  
                 mc_DApar%DApar = arr_params_set%tot_paramsets(upgraded,:)
                 call mc_update_mc_params()
                 call mc_update_params4simu()
                 call initialize_teco(st)!, .True.)
                 call teco_simu(st, .True.)            ! run the model
-                ! nsave = nsave + 1
+                nsave = nsave + 1
             endif
 
         enddo
