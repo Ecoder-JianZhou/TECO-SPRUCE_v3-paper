@@ -7,7 +7,7 @@ module mcmc
     implicit none
 
     integer ipar, covexist, npar4DA
-    integer,parameter :: nobs = 22
+    integer,parameter :: nobs = 23
 
     real(8) :: fact_rejet
     real(8) J_last(nobs), J_new(nobs), accept_rate, J_show_old, J_show_new, delta_scale, delta_scale_min, delta_scale_max
@@ -812,6 +812,14 @@ module mcmc
             call CalculateCost(vars4MCMC%bnpp_shrub_y%mdData(:,4), vars4MCMC%bnpp_shrub_y%obsData(:,4),&
                  vars4MCMC%bnpp_shrub_y%obsData(:,5), J_cost)
             J_new(22) = J_new(22) + J_cost*100
+        endif
+        ! -----------------------------
+
+        ! gpp_tree_y
+        if(vars4MCMC%gpp_tree_y%existOrNot)then
+            call CalculateCost(vars4MCMC%gpp_tree_y%mdData(:,4), vars4MCMC%gpp_tree_y%obsData(:,4),&
+                 vars4MCMC%gpp_tree_y%obsData(:,5), J_cost)
+            J_new(21) = J_new(23) + J_cost*100
         endif
 
         ! =====================================================================================

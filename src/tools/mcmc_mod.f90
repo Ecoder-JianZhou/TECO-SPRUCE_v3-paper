@@ -140,6 +140,8 @@ module mcmc_mod
     !
     character(500) :: obsfile_bnpp_tree_y 
     character(500) :: obsfile_bnpp_shrub_y 
+    !
+    character(500) :: obsfile_gpp_tree_y 
 
     ! variables for calculating the cost in MCMC processes
     type interCostVariable
@@ -188,6 +190,8 @@ module mcmc_mod
         !
         type(interCostVariable) :: bnpp_shrub_y 
         type(interCostVariable) :: bnpp_tree_y 
+        !
+        type(interCostVariable) :: gpp_tree_y ! just to keep tree gpp reasonable with CUE = 0.5
     end type allCostVariables
 
     type(allCostVariables) :: vars4MCMC      ! define a allCostVariables first
@@ -354,6 +358,8 @@ module mcmc_mod
         vars4MCMC%bnpp_tree_y%mc_itime  = 1
         vars4MCMC%bnpp_shrub_y%mc_itime   = 1
 
+        vars4MCMC%gpp_tree_y%mc_itime  = 1
+
         mc_iyear = 1
         mc_iday  = 1
         mc_ihour = 1
@@ -374,7 +380,8 @@ module mcmc_mod
             obsfile_leaf_resp_shrub_d, obsfile_leaf_resp_tree_d, obsfile_ch4_d, obsfile_ch4_h, obsfile_ch4_y, & 
             obsfile_CN_shag_d, obsfile_photo_shrub_d, obsfile_photo_tree_d, &
             obsfile_cPlant_tree_y, obsfile_cSoil_y, obsfile_cPlant_sphag_y, obsfile_watertable_h, &
-            obsfile_LAI_shrub_d, obsfile_LAI_tree_d, obsfile_photo_tree_h, obsfile_bnpp_tree_y, obsfile_bnpp_shrub_y
+            obsfile_LAI_shrub_d, obsfile_LAI_tree_d, obsfile_photo_tree_h, &
+            obsfile_bnpp_tree_y, obsfile_bnpp_shrub_y, obsfile_gpp_tree_y
 
         ! character(50) :: parname_1,  parname_2,  parname_3,  parname_4,  parname_5,  parname_6
         ! character(50) :: parname_7,  parname_8,  parname_9,  parname_10, parname_11, parname_12
@@ -662,6 +669,8 @@ module mcmc_mod
         !
         vars4MCMC%bnpp_tree_y%filepath = adjustl(trim(inDir))//"/"//adjustl(trim(obsfile_bnpp_tree_y))
         vars4MCMC%bnpp_shrub_y%filepath = adjustl(trim(inDir))//"/"//adjustl(trim(obsfile_bnpp_shrub_y))
+        !
+        vars4MCMC%gpp_tree_y%filepath = adjustl(trim(inDir))//"/"//adjustl(trim(obsfile_gpp_tree_y))
     end subroutine readMCMC_configs_NML
 
     subroutine update_mc_tile_params(in_mc_par, parname, parval, parmin, parmax)
@@ -714,6 +723,8 @@ module mcmc_mod
         !
         call readObsData_var(vars4MCMC%bnpp_tree_y)
         call readObsData_var(vars4MCMC%bnpp_shrub_y)
+        !
+        call readObsData_var(vars4MCMC%gpp_tree_y)
     end subroutine readObsData
 
     subroutine readObsData_var(var_obsData)
@@ -1664,6 +1675,8 @@ module mcmc_mod
 
         call GetSimuData_var(vars4MCMC%bnpp_tree_y,  in_st%sp(1)%pft_weight*outVars_y%sp(1)%nppRoot*24*365) 
         call GetSimuData_var(vars4MCMC%bnpp_shrub_y, in_st%sp(2)%pft_weight*outVars_y%sp(2)%nppRoot*24*365) 
+
+        call GetSimuData_var(vars4MCMC%gpp_tree_y,  in_st%sp(1)%pft_weight*outVars_y%sp(1)%gpp*24*365) 
 
     end subroutine GetSimuData
 
