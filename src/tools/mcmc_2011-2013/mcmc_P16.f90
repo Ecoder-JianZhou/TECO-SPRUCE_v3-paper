@@ -269,7 +269,7 @@ module mcmc
                 endif
             endif
 
-            if((mod(IDAsimu, 100) .eq. 0) .and. (upgraded .gt. 2)) then
+            if((mod(IDAsimu, 20000) .eq. 0) .and. (upgraded .gt. 2)) then
                 ! call mcmc_param_outputs(upgraded, npar4DA, st, nsave)
                 write(str_nsave, "(I0.3)") nsave
                 mc_str_n = "mid_save_"//adjustl(trim(str_nsave))  
@@ -690,7 +690,7 @@ module mcmc
         if(vars4MCMC%BNPP_y%existOrNot)then
             call CalculateCost(vars4MCMC%BNPP_y%mdData(:,4), vars4MCMC%BNPP_y%obsData(:,4)*1.2,&
                  vars4MCMC%BNPP_y%obsData(:,5)/vars4MCMC%BNPP_y%obsData(:,5)*0.5, J_cost)
-            J_new(6) = J_new(6) + J_cost*100000
+            J_new(6) = J_new(6) + J_cost*2000
         endif
 
         ! C plant sphagnum

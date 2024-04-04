@@ -270,7 +270,7 @@ module mcmc
                 endif
             endif
 
-            if((mod(IDAsimu, 100) .eq. 0) .and. (upgraded .gt. 2)) then
+            if((mod(IDAsimu, 20000) .eq. 0) .and. (upgraded .gt. 2)) then
                 ! call mcmc_param_outputs(upgraded, npar4DA, st, nsave)
                 write(str_nsave, "(I0.3)") nsave
                 mc_str_n = "mid_save_"//adjustl(trim(str_nsave))  
@@ -714,7 +714,7 @@ module mcmc
         if(vars4MCMC%gpp_d%existOrNot)then
             call CalculateCost(vars4MCMC%gpp_d%mdData(:,4), vars4MCMC%gpp_d%obsData(:,4),&
                  vars4MCMC%gpp_d%obsData(:,5), J_cost)
-            J_new(9) = J_new(9) + J_cost*10000
+            J_new(9) = J_new(9) + J_cost*20000
         endif
         ! print*, vars4MCMC%gpp_d%mdData(:,4), vars4MCMC%gpp_d%obsData(:,4)
         ! print*,"after:", J_new

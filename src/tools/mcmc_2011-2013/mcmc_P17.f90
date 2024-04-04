@@ -269,7 +269,7 @@ module mcmc
                 endif
             endif
 
-            if((mod(IDAsimu, 100) .eq. 0) .and. (upgraded .gt. 2)) then
+            if((mod(IDAsimu, 20000) .eq. 0) .and. (upgraded .gt. 2)) then
                 ! call mcmc_param_outputs(upgraded, npar4DA, st, nsave)
                 write(str_nsave, "(I0.3)") nsave
                 mc_str_n = "mid_save_"//adjustl(trim(str_nsave))  
@@ -669,7 +669,7 @@ module mcmc
             call CalculateCost(vars4MCMC%leaf_mass_shrub_y%mdData(:,4), vars4MCMC%leaf_mass_shrub_y%obsData(:,4),&
                  vars4MCMC%leaf_mass_shrub_y%obsData(:,5), J_cost)
             ! print*, vars4MCMC%leaf_mass_shrub_y%mdData(:,4), vars4MCMC%leaf_mass_shrub_y%obsData(:,4)
-            J_new(3) = J_new(3) + J_cost*10000
+            J_new(3) = J_new(3) + J_cost*50000
         endif
 
         ! stem_mass_shrub_y
@@ -683,28 +683,28 @@ module mcmc
         if(vars4MCMC%ANPP_Shrub_y%existOrNot)then
             call CalculateCost(vars4MCMC%ANPP_Shrub_y%mdData(:,4), vars4MCMC%ANPP_Shrub_y%obsData(:,4),&
                  vars4MCMC%ANPP_Shrub_y%obsData(:,5), J_cost)
-            J_new(5) = J_new(5) + J_cost*5000 ! test *10 to better constrain
+            J_new(5) = J_new(5) + J_cost*50000 ! test *10 to better constrain
         endif
 
         ! BNPP_y  ! tree + shrub
         if(vars4MCMC%BNPP_y%existOrNot)then
             call CalculateCost(vars4MCMC%BNPP_y%mdData(:,4), vars4MCMC%BNPP_y%obsData(:,4)*1.2,&
                  vars4MCMC%BNPP_y%obsData(:,5)/vars4MCMC%BNPP_y%obsData(:,5)*0.5, J_cost)
-            J_new(6) = J_new(6) + J_cost*2000
+            J_new(6) = J_new(6) + J_cost*100
         endif
 
         ! C plant sphagnum
         if(vars4MCMC%cPlant_sphag_y%existOrNot)then
             call CalculateCost(vars4MCMC%cPlant_sphag_y%mdData(:,4), vars4MCMC%cPlant_sphag_y%obsData(:,4),&
                  vars4MCMC%cPlant_sphag_y%obsData(:,5), J_cost)
-            J_new(7) = J_new(7) + J_cost*100
+            J_new(7) = J_new(7) + J_cost*10000
         endif
 
         ! ! ! NPP_sphag_y
         if(vars4MCMC%NPP_sphag_y%existOrNot)then
             call CalculateCost(vars4MCMC%NPP_sphag_y%mdData(:,4), vars4MCMC%NPP_sphag_y%obsData(:,4),&
                  vars4MCMC%NPP_sphag_y%obsData(:,5), J_cost)
-            J_new(8) = J_new(8) + J_cost*100
+            J_new(8) = J_new(8) + J_cost*50000
         endif  
         ! print*, vars4MCMC%NPP_sphag_y%mdData(:,4), vars4MCMC%NPP_sphag_y%obsData(:,4)
         ! print*, J_new(8), J_last(8)
@@ -728,7 +728,7 @@ module mcmc
         if(vars4MCMC%nee_h%existOrNot)then
             call CalculateCost(vars4MCMC%nee_h%mdData(:,4), vars4MCMC%nee_h%obsData(:,4),&
                  vars4MCMC%nee_h%obsData(:,5), J_cost)
-            J_new(11) = J_new(11) + J_cost*10000
+            J_new(11) = J_new(11) + J_cost*20000
         endif
 
         if(vars4MCMC%cSoil_y%existOrNot)then
@@ -811,7 +811,7 @@ module mcmc
         if(vars4MCMC%bnpp_shrub_y%existOrNot)then
             call CalculateCost(vars4MCMC%bnpp_shrub_y%mdData(:,4), vars4MCMC%bnpp_shrub_y%obsData(:,4),&
                  vars4MCMC%bnpp_shrub_y%obsData(:,5), J_cost)
-            J_new(22) = J_new(22) + J_cost*100
+            J_new(22) = J_new(22) + J_cost*10
         endif
         ! =====================================================================================
 
