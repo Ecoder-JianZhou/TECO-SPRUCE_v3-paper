@@ -818,7 +818,7 @@ module mcmc
         if(vars4MCMC%gpp_tree_y%existOrNot)then
             call CalculateCost(vars4MCMC%gpp_tree_y%mdData(:,4), vars4MCMC%gpp_tree_y%obsData(:,4),&
                  vars4MCMC%gpp_tree_y%obsData(:,5), J_cost)
-            J_new(21) = J_new(23) + J_cost*100
+            J_new(23) = J_new(23) + J_cost*100
         endif
         ! =====================================================================================
 

@@ -2,5 +2,5 @@ export LD_LIBRARY_PATH=/home/jz964/miniconda3/envs/spruce-da/lib/:$LD_LIBRARY_PA
 
 
 
-./run_teco_desktop_P13 teco_settings_desktop_P13.nml
+./run_teco_desktop_P13 cfg_treat/teco_settings_desktop_P13.nml
 rm run_teco_desktop_P13

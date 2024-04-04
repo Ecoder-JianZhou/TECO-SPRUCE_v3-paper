@@ -7,6 +7,7 @@ module mcmc
     implicit none
 
     integer ipar, covexist, npar4DA
+    integer,parameter :: nobs = 23
 
     real(8) :: fact_rejet
     real(8) J_last(20), J_new(20), accept_rate, J_show_old, J_show_new, delta_scale, delta_scale_min, delta_scale_max
@@ -134,6 +135,9 @@ module mcmc
         type(site_data_type), intent(inout) :: st
         integer temp_upgraded, ipft, mark4scale, ishow, nonaccept
         real(8) rand, init_scale, rand_scale
+        integer nsave
+        character(3) :: str_nsave
+        nsave = 1
         
         print *, "# Start to run mcmc ..."
         call generate_newPar()
@@ -265,6 +269,18 @@ module mcmc
                         mc_DApar%gamma = mc_DApar%gamnew
                     endif
                 endif
+            endif
+
+            if((mod(IDAsimu, 10000) .eq. 0) .and. (upgraded .gt. 2)) then
+                ! call mcmc_param_outputs(upgraded, npar4DA, st, nsave)
+                write(str_nsave, "(I0.3)") nsave
+                mc_str_n = "mid_save_"//adjustl(trim(str_nsave))  
+                mc_DApar%DApar = arr_params_set%tot_paramsets(upgraded,:)
+                call mc_update_mc_params()
+                call mc_update_params4simu()
+                call initialize_teco(st)!, .True.)
+                call teco_simu(st, .True.)            ! run the model
+                nsave = nsave + 1
             endif
         enddo
 

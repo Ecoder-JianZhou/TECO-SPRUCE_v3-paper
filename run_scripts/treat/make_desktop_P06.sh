@@ -9,7 +9,7 @@ gfortran  -g -fbacktrace -Wall -fcheck=all -cpp -DUSE_NETCDF\
     src/tools/mcmc_mod.f90 \
     src/teco/driver.f90 \
     src/tools/mcmc_outputs.f90  \
-    src/tools/mcmc_P06.f90   \
+    src/tools/mcmc_2015-2021/mcmc_P06.f90   \
     src/tools/sensitivity.f90   \
     src/tools/spinup.f90  \
     src/main.f90 \

@@ -9,7 +9,7 @@ gfortran  -g -fbacktrace -Wall -fcheck=all -cpp -DUSE_NETCDF\
     src/tools/mcmc_mod.f90 \
     src/teco/driver.f90 \
     src/tools/mcmc_outputs.f90  \
-    src/tools/mcmc_P04.f90   \
+    src/tools/mcmc_2015-2021/mcmc_P04.f90   \
     src/tools/sensitivity.f90   \
     src/tools/spinup.f90  \
     src/main.f90 \
@@ -42,7 +42,7 @@ gfortran  -g -fbacktrace -Wall -fcheck=all -cpp -DUSE_NETCDF\
     src/tools/mcmc_mod.f90 \
     src/teco/driver.f90 \
     src/tools/mcmc_outputs.f90  \
-    src/tools/mcmc_P06.f90   \
+    src/tools/mcmc_2015-2021/mcmc_P06.f90   \
     src/tools/sensitivity.f90   \
     src/tools/spinup.f90  \
     src/main.f90 \
@@ -77,7 +77,7 @@ gfortran  -g -fbacktrace -Wall -fcheck=all -cpp -DUSE_NETCDF\
     src/tools/mcmc_mod.f90 \
     src/teco/driver.f90 \
     src/tools/mcmc_outputs.f90  \
-    src/tools/mcmc_P08.f90   \
+    src/tools/mcmc_2015-2021/mcmc_P08.f90   \
     src/tools/sensitivity.f90   \
     src/tools/spinup.f90  \
     src/main.f90 \
@@ -111,7 +111,7 @@ gfortran  -g -fbacktrace -Wall -fcheck=all -cpp -DUSE_NETCDF\
     src/tools/mcmc_mod.f90 \
     src/teco/driver.f90 \
     src/tools/mcmc_outputs.f90  \
-    src/tools/mcmc_P10.f90   \
+    src/tools/mcmc_2015-2021/mcmc_P10.f90   \
     src/tools/sensitivity.f90   \
     src/tools/spinup.f90  \
     src/main.f90 \
@@ -145,7 +145,7 @@ gfortran  -g -fbacktrace -Wall -fcheck=all -cpp -DUSE_NETCDF\
     src/tools/mcmc_mod.f90 \
     src/teco/driver.f90 \
     src/tools/mcmc_outputs.f90  \
-    src/tools/mcmc_P11.f90   \
+    src/tools/mcmc_2015-2021/mcmc_P11.f90   \
     src/tools/sensitivity.f90   \
     src/tools/spinup.f90  \
     src/main.f90 \
@@ -179,7 +179,7 @@ gfortran  -g -fbacktrace -Wall -fcheck=all -cpp -DUSE_NETCDF\
     src/tools/mcmc_mod.f90 \
     src/teco/driver.f90 \
     src/tools/mcmc_outputs.f90  \
-    src/tools/mcmc_P13.f90   \
+    src/tools/mcmc_2015-2021/mcmc_P13.f90   \
     src/tools/sensitivity.f90   \
     src/tools/spinup.f90  \
     src/main.f90 \
@@ -213,7 +213,7 @@ gfortran  -g -fbacktrace -Wall -fcheck=all -cpp -DUSE_NETCDF\
     src/tools/mcmc_mod.f90 \
     src/teco/driver.f90 \
     src/tools/mcmc_outputs.f90  \
-    src/tools/mcmc_P16.f90   \
+    src/tools/mcmc_2015-2021/mcmc_P16.f90   \
     src/tools/sensitivity.f90   \
     src/tools/spinup.f90  \
     src/main.f90 \
@@ -247,7 +247,7 @@ gfortran  -g -fbacktrace -Wall -fcheck=all -cpp -DUSE_NETCDF\
     src/tools/mcmc_mod.f90 \
     src/teco/driver.f90 \
     src/tools/mcmc_outputs.f90  \
-    src/tools/mcmc_P17.f90   \
+    src/tools/mcmc_2015-2021/mcmc_P17.f90   \
     src/tools/sensitivity.f90   \
     src/tools/spinup.f90  \
     src/main.f90 \
@@ -282,7 +282,7 @@ gfortran  -g -fbacktrace -Wall -fcheck=all -cpp -DUSE_NETCDF\
     src/tools/mcmc_mod.f90 \
     src/teco/driver.f90 \
     src/tools/mcmc_outputs.f90  \
-    src/tools/mcmc_P19.f90   \
+    src/tools/mcmc_2015-2021/mcmc_P19.f90   \
     src/tools/sensitivity.f90   \
     src/tools/spinup.f90  \
     src/main.f90 \
@@ -316,7 +316,7 @@ gfortran  -g -fbacktrace -Wall -fcheck=all -cpp -DUSE_NETCDF\
     src/tools/mcmc_mod.f90 \
     src/teco/driver.f90 \
     src/tools/mcmc_outputs.f90  \
-    src/tools/mcmc_P20.f90   \
+    src/tools/mcmc_2015-2021/mcmc_P20.f90   \
     src/tools/sensitivity.f90   \
     src/tools/spinup.f90  \
     src/main.f90 \

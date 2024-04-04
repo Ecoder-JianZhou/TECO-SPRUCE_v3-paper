@@ -3,11 +3,12 @@
 import pandas as pd
 import numpy  as np
 
-mod_path = "/Users/jianzhou/Documents/1_MyWorks/1_SPRUCE_cases/1_SPRUCE_DA/5_data_assimilation_acclimation/1_datasources/3_mcmc_8_modify/"
+# mod_path = "/Users/jianzhou/Documents/1_MyWorks/1_SPRUCE_cases/1_SPRUCE_DA/5_data_assimilation_acclimation/1_datasources/3_mcmc_8_modify/"
+mod_path = "/mnt/d/3_case_SPRUCE_data_analysis/2_TECO-SPRUCE_data_assimilation/5_TECO-SPRUCE_v3_DA/1_outputs/6_acc_results/1_mcmc_2011-2013_no_initial_values/4_initial_3"
 nsimu    = 1#5
 com_path = "run_mcmc_"
 
-plot_names = ["P04", "P06",  "P08", "P10", "P11", "P13", "P16", "P17", "P19", "P20"]
+plot_names = ["P04", "P06", "P07",  "P08", "P10", "P11", "P13", "P16", "P17", "P19", "P20"]
 
 cleaf = [140, 90.3, 80]
 cstem = [250, 45.2,	30]
