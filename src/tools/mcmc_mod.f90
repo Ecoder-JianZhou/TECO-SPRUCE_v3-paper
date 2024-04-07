@@ -1671,7 +1671,7 @@ module mcmc_mod
 
         call GetSimuData_var(vars4MCMC%lai_shrub_d,  outVars_d%sp(2)%lai) 
         call GetSimuData_var(vars4MCMC%lai_tree_d,  outVars_d%sp(1)%lai) 
-        call GetSimuData_var(vars4MCMC%photo_tree_h, outVars_h%sp(1)%Aleaf(1)) 
+        call GetSimuData_var(vars4MCMC%photo_tree_h, outVars_h%sp(1)%Aleaf(3)) 
 
         call GetSimuData_var(vars4MCMC%bnpp_tree_y,  in_st%sp(1)%pft_weight*outVars_y%sp(1)%nppRoot*24*365) 
         call GetSimuData_var(vars4MCMC%bnpp_shrub_y, in_st%sp(2)%pft_weight*outVars_y%sp(2)%nppRoot*24*365) 

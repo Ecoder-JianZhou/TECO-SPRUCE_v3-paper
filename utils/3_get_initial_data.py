@@ -4,7 +4,7 @@ import pandas as pd
 import numpy  as np
 
 # mod_path = "/Users/jianzhou/Documents/1_MyWorks/1_SPRUCE_cases/1_SPRUCE_DA/5_data_assimilation_acclimation/1_datasources/3_mcmc_8_modify/"
-mod_path = "/mnt/d/3_case_SPRUCE_data_analysis/2_TECO-SPRUCE_data_assimilation/5_TECO-SPRUCE_v3_DA/1_outputs/6_acc_results/1_mcmc_2011-2013_no_initial_values/4_initial_3"
+mod_path = "/mnt/d/3_case_SPRUCE_data_analysis/2_TECO-SPRUCE_data_assimilation/5_TECO-SPRUCE_v3_DA/1_outputs/6_acc_results/1_mcmc_2011-2013_no_initial_values/4_initial_6"
 nsimu    = 1#5
 com_path = "run_mcmc_"
 

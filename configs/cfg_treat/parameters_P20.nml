@@ -84,8 +84,8 @@ s_nsc = 0.1825, 3.242, 1.264
 s_nsn = 1.308, 2.666, 2.253
 /
 &nml_site_initial_values
-cLit_m  = 257.2626
-cLit_s  = 321.2511
+cLit_m  = 235.7715
+cLit_s  = 293.4614
 cSoil_f = 692 !322.
 cSoil_s = 47725.6 ! 0.55* (69284 - 692)
 cSoil_p = 40866.4
